@@ -1,0 +1,13 @@
+body{
+	padding-top:30px;
+}
+
+.masthead{
+	text-align:center;
+	background-color:#9bf;
+	text-shadow: 5px 5px 5px rgba(255, 255, 255, 0.5);
+}
+
+.contact-list td{
+	vertical-align:middle;
+}

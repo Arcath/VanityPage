@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title><%= @config.name %></title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/layout.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body data-spy="scroll">
+	<div class="navbar navbar-fixed-top" id="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#"><%= @config.name %></a>
+				<ul class="nav">
+					<% @config.pages.each do |page| %>
+						<li <%= 'class="active"' if page == @config.pages.first %> ><a href="#<%= page %>"><%= page.capitalize %></a></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="hero-unit masthead">
+				<h1><%= @config.name %></h1>
+				<h2><%= @config.title %></h2>
+			</div>
+		</div>
+
+		<% @config.pages.each do |page| %>
+			<div class="row page" id="<%= page %>">
+				<%= render :erb, File.read("views/_#{page}.erb") %>	
+			</div>
+		<% end %>
+	</div>
+	
+	<script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap-scrollspy.js"></script>
+	<script src="/js/layout.js"></script>
+</body>
+</html>
