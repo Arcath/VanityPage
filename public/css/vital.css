@@ -1,0 +1,19 @@
+html, body{
+	height:100%;
+}
+
+body{
+	background-color:#9bf;
+}
+
+.table{
+	width:600px;
+	margin:auto;
+	margin-top:17%;
+	background-color:#fff;
+}
+
+.centered-row td{
+	text-align:center;
+	width:33%;
+}

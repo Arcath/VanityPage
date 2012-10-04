@@ -1,6 +1,11 @@
+html{
+	height:100%;
+}
+
 body{
 	padding-top:30px;
 	padding-bottom:30px;
+	height:100%;
 }
 
 .masthead{
@@ -11,4 +16,31 @@ body{
 
 .contact-list td{
 	vertical-align:middle;
+}
+
+.page{
+	padding-top:30px;
+}
+
+.first-page{
+	background-color:#9bf;
+	text-align:center;
+	padding-bottom:40px;
+	text-shadow: 5px 5px 5px rgba(255, 255, 255, 0.5);
+}
+
+.first-page h1{
+	margin-top:20%;
+}
+
+.first-page ul{
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	width:192px;
+	margin:auto;
+}
+
+.first-page ul li{
+	float:left;
 }

@@ -1,5 +1,5 @@
 module VanityPage
-    Aliases = {"/" => :index}
+    Aliases = {"/" => :index, "/vital" => :vital}
     
     def self.generate(path)
         generate_config unless @config

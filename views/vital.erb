@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title><%= @config.name %></title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/vital.css" rel="stylesheet">
+	<link rel="shortcut icon" href="https://secure.gravatar.com/avatar/4dea71e9df9a75bddd0c6aac8095065b?s=16" />
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-19397862-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+</head>
+<body>
+	<!-- A Table... how retro-->
+	<table class="table table-bordered">
+		<tr>
+			<th colspan="3"><h1><%= @config.name %></h1></th>
+		</tr>
+		<tr class="centered-row">
+			<td>IT Engineer</td>
+			<td>Developer</td>
+			<td>Gamer</td>
+		</tr>
+		<tr class="centered-row">
+			<td><a href="https://github.com/Arcath" target="_BLANK"><img src="/img/github_64.png" /></a></td>
+			<td><a href="http://www.linkedin.com/profile/view?id=120149266&trk=tab_pro" target="_BLANK"><img src="/img/linkedin_64.png" /></a></td>
+			<td><a href="http://twitter.com/ArcathWhitefall" target="_BLANK"><img src="/img/twitter_64.png" /></a></td>
+		</tr>
+		<tr>
+			<td colspan="3"><%= render :erb, File.read("views/_vital.erb") %></td>
+		</tr>
+	</table>
+	<script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap-scrollspy.js"></script>
+	<script src="/js/layout.js"></script>
+</body>
+</html>

@@ -6,11 +6,11 @@ require "bundler/setup"
 
 # Gems
 require 'sinatra'
-require 'yaml'
+#require 'yaml'
 
 # Internal Requries
-require 'lib/vanity_page'           # Main Module
-require 'lib/vanity_page/config'    # Config Class
+require './lib/vanity_page'           # Main Module
+require './lib/vanity_page/config'    # Config Class
 
 get '*' do |path|
     template, @config = VanityPage.generate(path)
