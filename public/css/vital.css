@@ -2,6 +2,10 @@ html, body{
 	height:100%;
 }
 
+h1, h2, h3{
+	font-family:'Architects Daughter';
+}
+
 body{
 	background-color:#9bf;
 }

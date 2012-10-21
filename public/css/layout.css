@@ -8,6 +8,10 @@ body{
 	height:100%;
 }
 
+h1, h2, h3{
+	font-family:'Architects Daughter';
+}
+
 .masthead{
 	text-align:center;
 	background-color:#9bf;
