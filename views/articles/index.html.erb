@@ -2,8 +2,8 @@
 	<h1>Articles</h1>
 </div>
 
-<% Dir.entries("views/articles").each do |article| %>
+<% Dir.entries("views/articles").sort.each do |article| %>
 	<% if article =~ /\.html\.erb/ && article != "index.html.erb" %>
-	<%= VanityPage::Helpers.article(article) %>
+		<%= VanityPage::Helpers.article(article) %>
 	<% end %>
 <% end %>
