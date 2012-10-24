@@ -1,0 +1,44 @@
+<div class="page-header">
+	<h1>WDS on Windows Server 2003</h1>
+</div>
+
+<div class="well">
+<p>Windows Deployment Services (WDS) is an amazing tool but there are some differences between the awesome WDS on server 2008 and the lesser version on 2003.</p>
+
+<p>WDS can be found under add/remove windows components on Server 2003 SP1 and is installed by simply ticking it in that wizard. Once installed go into administrative tools and open it up. You are then presented with WDS, run through the initial setup (there are plenty of guides for this, its the sameas 2008). Once setup it looks pretty much the same as 2008s WDS, same icons and layout apart from on major thing, There is no driver section. 2003s WDS for what ever reason wont do drivers, so the only way for you to add drivers is to use the dism tool from the Windows AIK. The AIK is a pretty hefty download (1.6GB) but its a great help, especially when making the unattended files later on.</p>
+
+<p>The big issues come from the lack of driver management, the process on 2008 is to simply add a driver package, and if needed apply it to the boot image (only really needed for network drivers). You will have to run through the process for all drivers you want to have on your image.</p>
+
+<p>I’m going to run through adding a network driver to the boot image, in my example when I say {WDS_ROOT} I mean the folder containing the folders Boot, Images, etc… which is shared as REMINST on the server. {DRIVERS_FOLDER} is the folder which contains my drivers I usually create a folder called drivers in the {WDS_ROOT} and then folders for each brand with sub folders for each model.</p>
+
+<p>Step 1 is to fire up the Deployment Tools Command Prompt from Start -> All Programs -> Microsoft Windows AIK -> Deployment Tools Command Prompt. This is just a normal command prompt with the AIK added to the path.</p>
+<p>First create a folder to mount to:</p>
+
+<blockquote><code>mkdir {WDS_ROOT}\Mounted</code></blockquote>
+
+<p>You now need to mount the deployment image to that folder, assuming that you used a 64bit WIndows 7 disk to generate your images this is the command to use: (for 32bit change x64 to x86)</p>
+
+<blockquote><code>dism /mount-wim /wimfile:{WDS_ROOT}\Boot\x64\Images\boot.wim /index:2 /mountdir:{WDS_ROOT}\Mounted</code></blockquote>
+
+<p>You now need to add the drivers to this mounted image, to do that use this command:</p>
+
+<blockquote><code>dism /image:{WDS_ROOT}\Mounted /add-driver /driver:{DRIVERS_FOLDER}\Brand\Model\Network\</code></blockquote>
+
+<p>If you pass a folder to the /driver option dism will look for all the drivers in that folder and add them all. You could pass a .inf file but I’ve found that most drivers have more than one and not all of them work for the hardware I have, the safest option is to just add all the drivers and leave it.</p>
+
+<p>The last step is to commit the changes back to the image file. The command to do this is:</p>
+
+<blockquote><code>dism /unmount-wim /mountdir:{WDS_ROOT}\Mounted /commit</code></blockquote>
+
+<p>Thats it! Your deploy image now contains the drivers for your network card.</p>
+
+<p>The process is the same for adding drivers to install images but you need to export the image before you can use it. To do this right click on the image in WDS and click Export Image, select a location to export to and give the file a name. Once that process completes you can then mount the image, to find out the index value you need to use this command:</p>
+
+<blockquote><code>dism /get-wiminfo /wimfile:{WDS_ROOT}\MountableImages\image.wim</code></blockquote>
+
+<p>This returns a list of the images contained in the wim file, the index you want is probably going to be 1.</p>
+
+<p>Once you have added the drivers and committed the changes back to the wim file you need to put that image back into WDS. To do this go back into WDS and right click on the image and click Replace Image give it the wim file you exported and click next and follow the rest of the wizard through, it can be left at the defaults assuming you want the image names the same etc…</p>
+
+<p>Thats it for now, im going to perform so more extensive testing in the future once I have an image ready to be used (I’ve been using the stock 7 image from the disk). If I run into any problems or find easier ways of doing things I will post them here.</p>
+</div>

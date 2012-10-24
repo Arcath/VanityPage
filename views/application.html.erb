@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title><%= @config.name %></title>
+	<title>Adam Laycock</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/layout.css" rel="stylesheet">
 	<link rel="shortcut icon" href="https://secure.gravatar.com/avatar/4dea71e9df9a75bddd0c6aac8095065b?s=16" />
@@ -23,41 +23,31 @@
 
 	</script>
 </head>
-<body data-spy="scroll">
-	<div class="navbar navbar-fixed-top" id="navbar">
+<body>
+	<canvas id="background"></canvas>
+	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="#main"><%= @config.name %></a>
+				<a class="brand" href="/">Adam Laycock</a>
 				<ul class="nav">
-					<% @config.pages.each do |page| %>
-						<li <%= 'class="active"' if page == @config.pages.first %> ><a href="#<%= page %>"><%= page.capitalize.gsub(/_/, ' ') %></a></li>
-					<% end %>
+					<li><a href="/">Home</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="/code">Code</a></li>
+					<li><a href="/work">Work</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="/games">Games</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="/articles">Articles</a></li>
+					<li class="divider-vertical"></li>
 				</ul>
 			</div>
 		</div>
 	</div>
-	
-	<div class="page first-page" id="main">
-		<h1><%= @config.name %></h1>
-		<h2><%= @config.title %></h2>
-		<ul>
-			<li><a href="https://github.com/Arcath" target="_BLANK"><img src="/img/github_64.png" /></a></li>
-			<li><a href="http://www.linkedin.com/profile/view?id=120149266&trk=tab_pro" target="_BLANK"><img src="/img/linkedin_64.png" /></a></li>
-			<li><a href="http://twitter.com/ArcathWhitefall" target="_BLANK"><img src="/img/twitter_64.png" /></a></li>
-		</ul>
+	<div id="main" class="container">
+		<%= render @format, File.read(@file) %>
 	</div>
-	
-	<div class="container">
-		<% @config.pages.each do |page| %>
-			<div class="row page" id="<%= page %>">
-				<%= render :erb, File.read("views/_#{page}.erb") %>	
-			</div>
-		<% end %>
-	</div>
-	
 	<script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/bootstrap-scrollspy.js"></script>
 	<script src="/js/layout.js"></script>
 </body>
 </html>

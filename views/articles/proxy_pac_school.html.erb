@@ -1,0 +1,22 @@
+<div class="page-header">
+	<h1>Proxy.pac for a School</h1>
+</div>
+
+<div class="well">
+<p>I’ve been going over the way I do internet settings in the schools I work in and have written a Proxy Auto Config file to configure the proxy correctly, and provide more features than just setting the proxy in IE.</p>
+
+<p>There are a few benefits to using a PAC file instead of manual proxy config:</p>
+
+<ol>
+	<li>Proxy config is stored in 1 file on your server. (Not really a big plus if you configure your proxy using a GPO)</li>
+	<li>It allows for better filtering including using another proxy server for some requests</li>
+	<li>If the PAC file can’t be found the browser defaults to a direct connection</li>
+</ol>
+<p>Point 3 is the big one as far as my schools are concerned, I get no end of issues with staff laptops because they forgot to turn the proxy on in school, or off at home. With a PAC file the laptop works fine in school and then when they get home and can’t resolve pac.school.local their browser defaults to a direct connection and everything works fine!</p>
+
+<p>My PAC file complete with comments and helpful variables looks like this:</p>
+<script src="https://gist.github.com/2205071.js"> </script>
+<p>This file is specifically tailored to the way the LEA (Local Education Authority) runs its proxy servers, but as should be apparent from the file there are 2 proxy servers, proxy.school.local which is on site and used by the school to block pages they don’t want, and proxy.lea.local is used by the LEA to block content for everyone in the LEA.</p>
+
+<p>There is a lot more you can do with a PAC file, for example you can <a href="http://www.proxypacfiles.com/proxypac/index.php?option=com_content&view=article&id=63&Itemid=104" target="_BLANK">load balance</a> between proxy servers. You can also do host filtering e.g. www.badsite.com doesn’t get the correct proxy, but it makes a lot more sense to me to do that kind of filtering with the proxy server.</p>
+</div>

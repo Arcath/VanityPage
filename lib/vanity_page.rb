@@ -1,22 +1,6 @@
+require File.expand_path('../vanity_page/helpers.rb', __FILE__)
+require File.expand_path('../vanity_page/router.rb', __FILE__)
+require File.expand_path('../vanity_page/template.rb', __FILE__)
+
 module VanityPage
-    Aliases = {"/" => :index, "/vital" => :vital}
-    
-    def self.generate(path)
-        generate_config unless @config
-        return [Aliases[path], @config]
-    end
-    
-    private
-    
-    def self.generate_config
-        @config = Config.new
-        yaml = YAML::load(File.open('config/page.yml'))
-        @config.name = yaml["name"]
-        @config.title = yaml["title"]
-        @config.pages = yaml["pages"]
-    end
-    
-    def self.apply_config(s)
-        s.gsub(/\{config-name\}/,@config.name)
-    end
 end

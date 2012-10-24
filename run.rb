@@ -10,9 +10,18 @@ require 'sinatra'
 
 # Internal Requries
 require './lib/vanity_page'           # Main Module
-require './lib/vanity_page/config'    # Config Class
 
 get '*' do |path|
-    template, @config = VanityPage.generate(path)
-    erb template
+  @template = VanityPage::Template.new(request.path_info, VanityPage::Router.new)
+  @format, @file = @template.yield
+  halt 404 if @file == @template.router.error["404"]
+  content_type @template.content_type
+  erb @template.application
 end
+
+not_found do
+  @template = VanityPage::Template.new(request.path_info, VanityPage::Router.new)
+  @format, @file = @template.yield
+  erb @template.application
+end
+
