@@ -6,3 +6,5 @@ source "http://rubygems.org"
 gem 'sinatra'
 
 gem 'unicorn' # For web serving
+
+gem 'feedzirra'
